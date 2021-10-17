@@ -2,21 +2,21 @@ module.exports = [
     {
         type: 'input',
         message: "What is the intern's name?",
-        name: "mName"
+        name: "iName"
     },
 
 
     {
         type: 'input',
         message: "What is the intern's id?",
-        name: "mId"
+        name: "iId"
     },
 
 
     {
         type: 'input',
         message: "What is the intern's email?",
-        name: "mEmail"
+        name: "iEmail"
     },
 
 
@@ -29,7 +29,7 @@ module.exports = [
     {
         type: 'list',
         message: "Which type of Member would you like to add to the team?",
-        name: "tMember",
+        name: "iMember",
         choices: ["Engineer", "Intern", "I'm finshed"]
 
     }

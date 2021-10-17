@@ -1,14 +1,17 @@
 const Employee = require("./lib/Employee");
 const fs = require('fs');
 const inquirer = require('inquirer');
-const team = require('./src/page-template.js');
+
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
-const teamArry = []
+
 const managerQuestions = require('./src/questions/managerQuestions');
 const internQuestions = require('./src/questions/internQuestions');
 const engineerQuestions = require('./src/questions/engineerQuestions');
+const teamArry = []
+
+const team = require('./src/page-template.js');
 let generateHTML = team;
 
 
@@ -21,16 +24,16 @@ function init() {
             const newM = new Manager(`${answers.mName}`, `${answers.mId}`, `${answers.mEmail}`, `${answers.mONumber}`)
 
             if (`${answers.tMember}` == "Engineer") {
+                teamArry.push(newM)
                 newEng();
-                teamArry.push(newM)
             } else if (`${answers.tMember}` == "Intern") {
-                newIn()
                 teamArry.push(newM)
-                return
+                newIn()
+                
             } else {
       teamArry.push(newM)
                 save()
-                return
+                
             }
 
         })
@@ -42,30 +45,33 @@ function init() {
             }
         });
 }
+
 
 function newEng() {
     inquirer
         .prompt(engineerQuestions)
         .then((answers) => {
 
-            const newEn = new Engineer(`${answers.mName}`, `${answers.mId}`, `${answers.mEmail}`, `${answers.enGit}`)
+            
 
+            const newEn = new Engineer(`${answers.mName}`, `${answers.mId}`, `${answers.mEmail}`, `${answers.enGit}`)
+           
             if (`${answers.tMember}` == "Engineer") {
-                newEng();
                 teamArry.push(newEn)
-                return
+                newEng();
+                
 
             } else if (`${answers.tMember}` == "Intern") {
-                newIn()
                 teamArry.push(newEn)
-                return
+                newIn()
+                
 
             } else {
                 
                 teamArry.push(newEn)
 
                 save()
-                return
+                
             }
         })
         .catch((error) => {
@@ -77,29 +83,37 @@ function newEng() {
         });
 }
 
+
+
+
+
 function newIn() {
     inquirer
         .prompt(internQuestions)
         .then((answers) => {
 
-            const newIn = new Intern(`${answers.mName}`, `${answers.mId}`, `${answers.mEmail}`, `${answers.iSchool}`)
+            console.log(answers)
 
-            if (`${answers.tMember}` == "Engineer") {
+            const newIn = new Intern(`${answers.iName}`, `${answers.iId}`, `${answers.iEmail}`, `${answers.iSchool}`)
+
+          if (`${answers.iMember}` == "Intern") {
+            teamArry.push(newIn)
+            newIn()
+            
+
+
+         } else if (`${answers.iMember}` == "Engineer") {
+                teamArry.push(newIn)
                 newEng();
-                teamArry.push(newIn)
-                return
+                
 
-            } else if (`${answers.tMember}` == "Intern") {
-                newIn()
-                teamArry.push(newIn)
-                return
 
-            } else {
+            } else if(`${answers.iMember}` == "I'm finshed") {
 
                 teamArry.push(newIn)
 
                 save()
-                return
+                
             }
 
         })
@@ -123,5 +137,7 @@ function save() {
 }
 
 
-// Function call to initialize app
+// Function call to initialize app, this starts with the manger
 init();
+
+
