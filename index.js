@@ -1,117 +1,234 @@
 const Employee = require("./lib/Employee");
-
-// Initialize a new Employee object ===== finish editing 
-// const game = new Game();
-
-// // Start playing
-// game.play();
-
-
-// TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateHTML = require('./src/page-template.js');
+const team = require('./src/page-template.js');
+const Manager = require("./lib/Manager");
+const Intern = require("./lib/Intern");
+const Engineer = require("./lib/Engineer");
+const teamArry = []
 //add genmarkdown
 
+// confirm.log(team.GenerateTeam())
+const test = new Manager("John", "1", "coakleymjohn@gmail.com", "104")
 
+let generateHTML = team
+
+console.log(generateHTML([test]))
+
+
+
+// console.log(hi([test]));
+
+// console.log(hi())
+// console.log(test)
+// console.log(test)
 // TODO: Create an array of questions for user input
-const questions = [
+const mQuestions = [
+
+
     {
         type: 'input',
-        message: "Please enter the file name of your read-me.",
-        name: "file"
+        message: "What is the team manager's name?",
+        name: "mName"
     },
+
+
+    {
+        type: 'input',
+        message: "What is the team manager's id?",
+        name: "mId"
+    },
+
+
+    {
+        type: 'input',
+        message: "What is the team manager's email?",
+        name: "mEmail"
+    },
+
+
+    {
+        type: 'input',
+        message: "What is the team manager's office number?",
+        name: "mONumber"
+    },
+
 
     {
         type: 'list',
-        message: "What file format do you want for your readme?",
-        name: "fileType",
-        choices: [".txt", ".md"]
-    },
-
-    {
-        type: 'input',
-        message: "Whats the title of your project?",
-        name: "project"
-    },
-
-
-
-    {
-        type: 'input',
-        message: "Provide a description of your project.",
-        name: "description"
-    },
-
-    {
-        type: 'input',
-        message: "Installation: How do you install your application?",
-        name: "installation"
-    },
-
-    {
-        type: 'input',
-        message: "Instructions",
-        name: "instructions"
-    },
-
-    {
-        type: 'input',
-        message: "Usage",
-        name: "usage"
-    },
-
-    {
-        type: 'input',
-        message: "Contribution Guidelines",
-        name: "contribution"
-    },
-
-    {
-        type: 'input',
-        message: "Testing instructions",
-        name: "testing"
-    },
-
-    {
-        type: 'list',
-        message: "Select your License",
-        name: "license",
-        choices: ["MIT", "MPL 2.0", "GPL v2", "none"]
+        message: "Which type of Member would you like to add to the team?",
+        name: "tMember",
+        choices: ["Engineer", "Intern", "I'm finshed"]
 
     }
 
 ];
 
-inquirer
-    .prompt(questions)
-    .then((answers) =>  writeToFile(`${answers.file}${answers.fileType}`, generateMarkdown(answers)))
-    .catch((error) => {
-        if (error.isTtyError) {
-            // Prompt couldn't be rendered in the current environment
-        } else {
-            // Something else went wrong
-        }
-    });
+const iQuestions = [{
+    type: 'input',
+    message: "Which school is the intern attending?",
+    name: "iSchool"
+}, ...mQuestions
+
+]
+
+const enQuestions = [{
+    type: 'input',
+    message: "What is the engineer's git hub profile?",
+    name: "enGit"
+}, ...mQuestions
+
+]
 
 
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
 
-    fs.writeFile(fileName, data, function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-    });
+
+
+function init() {
+
+    inquirer
+        .prompt(mQuestions)
+        .then((answers) => {
+
+
+
+            const newM = new Manager(`${answers.mName}`, `${answers.mId}`, `${answers.mEmail}`, `${answers.mONumber}`)
+
+
+            if (`${answers.tMember}` == "Engineer") {
+                newEng();
+                teamArry.push(newM)
+                return
+
+            } else if (`${answers.tMember}` == "Intern") {
+                newIn()
+                teamArry.push(newM)
+                return
+
+
+            } else {
+
+                teamArry.push(newM)
+
+                save()
+                return
+            }
+
+
+
+        })
+        .catch((error) => {
+            if (error.isTtyError) {
+                // Prompt couldn't be rendered in the current environment
+            } else {
+                // Something else went wrong
+            }
+        });
+
+
+
 
 }
-
-
-
-// TODO: Create a function to initialize app
-function init() { }
 
 // Function call to initialize app
 init();
 
 
+
+function newEng() {
+
+    inquirer
+        .prompt(enQuestions)
+        .then((answers) => {
+
+
+    
+
+
+
+            const newEn = new Engineer(`${answers.mName}`, `${answers.mId}`, `${answers.mEmail}`, `${answers.enGit}`)
+
+
+            if (`${answers.tMember}` == "Engineer") {
+                newEng();
+                teamArry.push(newEn)
+                return
+
+            } else if (`${answers.tMember}` == "Intern") {
+                newIn()
+                teamArry.push(newEn)
+                return
+
+
+            } else {
+
+                teamArry.push(newEn)
+
+                save()
+                return
+            }
+
+
+
+
+
+        })
+        .catch((error) => {
+            if (error.isTtyError) {
+                // Prompt couldn't be rendered in the current environment
+            } else {
+                // Something else went wrong
+            }
+        });
+}
+
+function newIn() {
+    inquirer
+        .prompt(iQuestions)
+        .then((answers) => {
+
+            // `${answers.mONumber}`
+
+            const newIn = new Intern(`${answers.mName}`, `${answers.mId}`, `${answers.mEmail}`, `${answers.iSchool}`)
+
+
+           
+            if (`${answers.tMember}` == "Engineer") {
+                newEng();
+                teamArry.push(newIn)
+                return
+
+            } else if (`${answers.tMember}` == "Intern") {
+                newIn()
+                teamArry.push(newIn)
+                return
+
+
+            } else {
+
+                teamArry.push(newIn)
+
+                save()
+                return
+            }
+
+        })
+        .catch((error) => {
+            if (error.isTtyError) {
+                // Prompt couldn't be rendered in the current environment
+            } else {
+                // Something else went wrong
+            }
+        });
+
+}
+
+
+function save() {
+
+    fs.writeFile("test.html", generateHTML(teamArry), function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+    });
+}

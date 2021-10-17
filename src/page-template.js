@@ -1,5 +1,13 @@
 // provided by instructor 
 // create the team
+const Manager = require("../lib/Manager");
+const Intern = require("../lib/Intern");
+const Engineer = require("../lib/Engineer");
+const Employee = require("../lib/Employee");
+const employee = new Employee
+
+
+
 const generateTeam = team => {
 
     // create the manager html
