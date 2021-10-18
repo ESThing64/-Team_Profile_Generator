@@ -28,7 +28,7 @@ function init() {
                 newEng();
             } else if (`${answers.tMember}` == "Intern") {
                 teamArry.push(newM)
-                newIn()
+                newInt()
                 
             } else {
       teamArry.push(newM)
@@ -63,7 +63,7 @@ function newEng() {
 
             } else if (`${answers.tMember}` == "Intern") {
                 teamArry.push(newEn)
-                newIn()
+                newInt()
                 
 
             } else {
@@ -87,18 +87,18 @@ function newEng() {
 
 
 
-function newIn() {
+function newInt() {
     inquirer
         .prompt(internQuestions)
         .then((answers) => {
 
-            console.log(answers)
+           
 
             const newIn = new Intern(`${answers.iName}`, `${answers.iId}`, `${answers.iEmail}`, `${answers.iSchool}`)
 
           if (`${answers.iMember}` == "Intern") {
             teamArry.push(newIn)
-            newIn()
+            newInt()
             
 
 
@@ -130,7 +130,7 @@ function newIn() {
 
 function save() {
 
-    fs.writeFile("test.html", generateHTML(teamArry), function (err) {
+    fs.writeFile("./output/index.html", generateHTML(teamArry), function (err) {
         if (err) throw err;
         console.log('Saved!');
     });
