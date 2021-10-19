@@ -1,7 +1,7 @@
 # Team Profile Generator
 
 ## Description
-This program will generate a html file with your team's info. You can find a sample in the root directory of the project. It has the file name of demo.
+This program will generate a html file with your team's info. You can find a sample in the root directory of the project. It has the file name of sample.html.
 
 ## Module used
 
