@@ -1,7 +1,7 @@
 # Team Profile Generator
 
 ## Description
-This program will generate a html file with your team's info. You can find a sample in the root directory of the project. [Click Here](https://esthing64.github.io/-Team_Profile_Generator/) to see a sample.
+This program will generate a html file with your team's info. You can find a sample in the root directory of the project. [Click Here](https://esthing64.github.io/-Team_Profile_Generator/) to see a sample. This project was built using OOP.
 
 ## Module used
 
