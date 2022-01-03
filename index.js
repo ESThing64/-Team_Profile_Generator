@@ -1,4 +1,3 @@
-const Employee = require("./lib/Employee");
 const fs = require('fs');
 const inquirer = require('inquirer');
 
@@ -39,9 +38,9 @@ function init() {
         })
         .catch((error) => {
             if (error.isTtyError) {
-                // Prompt couldn't be rendered in the current environment
-            } else {
-                // Something else went wrong
+                console.log("Prompt couldn't be rendered in the current environment")
+           } else {
+                console.log("Something else went wrong")
             }
         });
 }
@@ -76,9 +75,9 @@ function newEng() {
         })
         .catch((error) => {
             if (error.isTtyError) {
-                // Prompt couldn't be rendered in the current environment
+                console.log("Prompt couldn't be rendered in the current environment")
             } else {
-                // Something else went wrong
+                console.log("Something else went wrong")
             }
         });
 }
@@ -119,9 +118,9 @@ function newInt() {
         })
         .catch((error) => {
             if (error.isTtyError) {
-                // Prompt couldn't be rendered in the current environment
+                console.log("Prompt couldn't be rendered in the current environment")
             } else {
-                // Something else went wrong
+                console.log("Something else went wrong")
             }
         });
 
